@@ -17,6 +17,17 @@ namespace PokeApp
             PokemonNegocio negocio = new PokemonNegocio();
             listaPokemon = negocio.listar();
 
+            if (!IsPostBack)
+            {
+                repRepeater.DataSource = listaPokemon;
+                repRepeater.DataBind();
+            }           
+
+        }
+
+        protected void btnEjemplo_Click(object sender, EventArgs e)
+        {
+            string valor = ((Button)sender).CommandArgument;
         }
     }
 }
