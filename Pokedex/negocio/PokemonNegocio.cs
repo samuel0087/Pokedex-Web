@@ -57,6 +57,51 @@ namespace negocio
 
         }
 
+        public Pokemon getOne(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            string query = @"SELECT p.Id, p.Numero, p.Nombre, p.Descripcion, p.UrlImagen, t.Id AS idTipo, t.Descripcion AS Tipo, d.Id As idDebilidad, d.Descripcion As Debilidad " +
+                            "FROM POKEMONS p Inner Join ELEMENTOS t ON p.IdTipo = t.Id " +
+                            "Inner Join ELEMENTOS d ON p.IdDebilidad = d.Id " +
+                            "Where Activo = 1 and p.Id = @id";
+
+            try
+            {
+                datos.setearConsulta(query);
+                datos.setearParametro("@id", id);
+                datos.ejecutarLectura();
+                Pokemon aux = new Pokemon();
+
+                if (datos.Lector.Read())
+                {
+                    aux.Id = datos.Lector["Id"] is DBNull ? 0 : (int)datos.Lector["Id"];
+                    aux.Numero = datos.Lector["Numero"] is DBNull ? 0 : (int)datos.Lector["Numero"];
+                    aux.Nombre = datos.Lector["Nombre"] is DBNull ? "" : (string)datos.Lector["Nombre"];
+                    aux.Descripcion = datos.Lector["Descripcion"] is DBNull ? "" : (string)datos.Lector["Descripcion"];
+                    aux.UrlImagen = datos.Lector["UrlImagen"] is DBNull ? "" : (string)datos.Lector["UrlImagen"];
+
+                    aux.Tipo = new Elemento();
+                    aux.Tipo.Id = datos.Lector["idTipo"] is DBNull ? 0 : (int)datos.Lector["idTipo"];
+                    aux.Tipo.Descripcion = datos.Lector["Tipo"] is DBNull ? "" : (string)datos.Lector["Tipo"];
+
+                    aux.Debilidad = new Elemento();
+                    aux.Debilidad.Id = datos.Lector["idDebilidad"] is DBNull ? 0 : (int)datos.Lector["idDebilidad"];
+                    aux.Debilidad.Descripcion = datos.Lector["Debilidad"] is DBNull ? "" : (string)datos.Lector["Debilidad"];
+                }
+
+                return aux;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
+
         public void agregarPokemon(Pokemon pokemon)
         {
             AccesoDatos datos = new AccesoDatos();
