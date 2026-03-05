@@ -117,6 +117,7 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
+    <Content Include="EjemploDropDowns.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="FormularioPokemon.aspx" />
     <Content Include="Lista.aspx" />
@@ -191,6 +192,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EjemploDropDowns.aspx.cs">
+      <DependentUpon>EjemploDropDowns.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EjemploDropDowns.aspx.designer.cs">
+      <DependentUpon>EjemploDropDowns.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormularioPokemon.aspx.cs">
       <DependentUpon>FormularioPokemon.aspx</DependentUpon>
