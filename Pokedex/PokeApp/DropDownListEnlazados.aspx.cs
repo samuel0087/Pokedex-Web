@@ -20,6 +20,8 @@ namespace PokeApp
 
             List<Elemento> listaElementos = eNegocio.listar();
 
+            //Configuro desplegables desde 
+
 
         }
 
