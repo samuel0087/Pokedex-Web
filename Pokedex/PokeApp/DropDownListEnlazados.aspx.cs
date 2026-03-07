@@ -15,18 +15,28 @@ namespace PokeApp
         public PokemonNegocio pNegocio = new PokemonNegocio();
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Obtengo los datos de pokemons y los guardo en la session
-            Session["listaPokemons"] = pNegocio.listar();
+            if (!IsPostBack)
+            {
+                //Obtengo los datos de pokemons y los guardo en la session
+                Session["listaPokemons"] = pNegocio.listar();
 
-            List<Elemento> listaElementos = eNegocio.listar();
+                List<Elemento> listaElementos = eNegocio.listar();
 
-            //Configuro desplegables desde 
-
+                //Configuro desplegables desde db con id y descripcion
+                ddlTipo.DataSource = listaElementos;
+                ddlTipo.DataTextField = "Descripcion";
+                ddlTipo.DataValueField = "Id";
+                ddlTipo.DataBind();
+            }
 
         }
 
         protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int id = int.Parse(ddlTipo.SelectedItem.Value);
+            ddlPokemonsFiltrados.DataSource = ((List<Pokemon>)Session["listaPokemons"]).FindAll(x => x.Tipo.Id == id);
+            ddlPokemonsFiltrados.DataTextField = "Nombre";
+            ddlPokemonsFiltrados.DataBind();
 
         }
     }

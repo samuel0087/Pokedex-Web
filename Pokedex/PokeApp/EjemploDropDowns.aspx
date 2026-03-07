@@ -14,8 +14,8 @@
         </div>
 
         <a href="DropDownListEnlazados.aspx">DropDownlist Enlazados</a>
-        <a href="#">Update Panel</a>
-        <a href="#">DropDownList con UpdatePanel</a>
+        <a href="UpdatePanel.aspx">Update Panel</a>
+        <a href="Precarga.aspx">Precargar una imagen</a>
         <a href="#">Seccion de elementos</a>
 
     </div>
