@@ -18,11 +18,6 @@
             </div>
 
             <div class="mb-3">
-                <label for="txtDescripcion" class="form-label">Descripción</label>
-                <asp:TextBox runat="server" ID="txtDescripcion" TextMode="MultiLine" CssClass="form-control"/>
-            </div>
-
-            <div class="mb-3">
                 <label for="ddlTipo" class="form-label">Tipo</label>
                 <asp:DropDownList ID="ddlTipo" CssClass="form-select" runat="server"></asp:DropDownList>
             </div>
@@ -37,6 +32,26 @@
                 <a href="Lista.aspx">Cancelar</a>
             </div>
 
+        </div>
+
+        <div class="col-6">
+            <div class="mb-3">
+                <label for="txtDescripcion" class="form-label">Descripción</label>
+                <asp:TextBox runat="server" ID="txtDescripcion" TextMode="MultiLine" CssClass="form-control" />
+            </div>
+
+            <asp:UpdatePanel runat="server">
+                <ContentTemplate>
+
+                    <div class="mb-3">
+                        <label for="txtImagen" class="form-label">UrlImagen</label>
+                        <asp:TextBox runat="server" AutoPostBack="true" OnTextChanged="txtImagen_TextChanged" ID="txtImagen" CssClass="form-control"/>
+                    </div>
+
+                    <asp:Image ImageUrl="https://cdn-icons-png.flaticon.com/512/12048/12048902.png" ID="imagenPokemon" width="60%" runat="server" />
+
+                </ContentTemplate>
+            </asp:UpdatePanel>
         </div>
     </div>
 
