@@ -13,10 +13,9 @@ namespace negocio
         {
             List<Pokemon> list = new List<Pokemon>();
             AccesoDatos datos = new AccesoDatos();
-            string query = @"SELECT p.Id, p.Numero, p.Nombre, p.Descripcion, p.UrlImagen, t.Id AS idTipo, t.Descripcion AS Tipo, d.Id As idDebilidad, d.Descripcion As Debilidad " +
+            string query = @"SELECT p.Id, p.Numero, p.Nombre, p.Descripcion, p.UrlImagen, t.Id AS idTipo, t.Descripcion AS Tipo, d.Id As idDebilidad, d.Descripcion As Debilidad, p.Activo " +
                             "FROM POKEMONS p Inner Join ELEMENTOS t ON p.IdTipo = t.Id " +
-                            "Inner Join ELEMENTOS d ON p.IdDebilidad = d.Id " +
-                            "Where Activo = 1";
+                            "Inner Join ELEMENTOS d ON p.IdDebilidad = d.Id ";
 
             try
             {
@@ -31,6 +30,7 @@ namespace negocio
                     aux.Nombre = datos.Lector["Nombre"] is DBNull ? "" : (string)datos.Lector["Nombre"];
                     aux.Descripcion = datos.Lector["Descripcion"] is DBNull ? "" : (string)datos.Lector["Descripcion"];
                     aux.UrlImagen = datos.Lector["UrlImagen"] is DBNull ? "" : (string)datos.Lector["UrlImagen"];
+                    aux.Estado = datos.Lector["Activo"] is DBNull ? false : (bool)datos.Lector["Activo"];
 
                     aux.Tipo = new Elemento();
                     aux.Tipo.Id = datos.Lector["idTipo"] is DBNull ? 0 : (int)datos.Lector["idTipo"];
@@ -60,7 +60,7 @@ namespace negocio
         public Pokemon getOne(int id)
         {
             AccesoDatos datos = new AccesoDatos();
-            string query = @"SELECT p.Id, p.Numero, p.Nombre, p.Descripcion, p.UrlImagen, t.Id AS idTipo, t.Descripcion AS Tipo, d.Id As idDebilidad, d.Descripcion As Debilidad " +
+            string query = @"SELECT p.Id, p.Numero, p.Nombre, p.Descripcion, p.UrlImagen, t.Id AS idTipo, t.Descripcion AS Tipo, d.Id As idDebilidad, d.Descripcion As Debilidad, p.Activo " +
                             "FROM POKEMONS p Inner Join ELEMENTOS t ON p.IdTipo = t.Id " +
                             "Inner Join ELEMENTOS d ON p.IdDebilidad = d.Id " +
                             "Where Activo = 1 and p.Id = @id";
@@ -79,6 +79,7 @@ namespace negocio
                     aux.Nombre = datos.Lector["Nombre"] is DBNull ? "" : (string)datos.Lector["Nombre"];
                     aux.Descripcion = datos.Lector["Descripcion"] is DBNull ? "" : (string)datos.Lector["Descripcion"];
                     aux.UrlImagen = datos.Lector["UrlImagen"] is DBNull ? "" : (string)datos.Lector["UrlImagen"];
+                    aux.Estado = datos.Lector["Activo"] is DBNull ? false : (bool)datos.Lector["Activo"];
 
                     aux.Tipo = new Elemento();
                     aux.Tipo.Id = datos.Lector["idTipo"] is DBNull ? 0 : (int)datos.Lector["idTipo"];

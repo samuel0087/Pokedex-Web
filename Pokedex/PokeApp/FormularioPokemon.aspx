@@ -53,6 +53,29 @@
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>
+
+        <div class="row">
+            <div class="col-4" style="margin: auto;"> 
+                <asp:UpdatePanel runat="server">
+                    <ContentTemplate>
+
+                        <% if (!ConfirmarEliminacion) { %>
+                            <div class="mb-3">
+                                <asp:Button Text="Eliminar" CssClass="btn btn-danger" ID="btnEliminar" OnClick="btnEliminar_Click" runat="server" />
+                                <asp:Button Text="Inactivar" CssClass="btn btn-warning" ID="btnInactivar" OnClick="btnInactivar_Click" runat="server" />
+                            </div>
+                        <% }else{ %>
+                            <div class="mb-3">
+                                <p>¿Confirma la eliminacion?</p>
+                                <asp:Button Text="Cancelar" CssClass="btn btn-secondary" ID="btnCancelarEliminacion" OnClick="btnCancelarEliminacion_Click" runat="server" />
+                                <asp:Button Text="Confirmar" CssClass="btn btn-danger" ID="btnConfirmarEliminacion" OnClick="btnConfirmarEliminacion_Click" runat="server" />
+                            </div>
+                        <% } %>
+
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+        </div>
     </div>
 
 </asp:Content>

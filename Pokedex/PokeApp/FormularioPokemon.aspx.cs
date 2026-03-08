@@ -11,13 +11,17 @@ namespace PokeApp
 {
     public partial class FormularioPokemon : System.Web.UI.Page
     {
+        public bool ConfirmarEliminacion;
+
         private PokemonNegocio negocio = new PokemonNegocio();
         protected void Page_Load(object sender, EventArgs e)
         {
             txtId.Enabled = false;
+            ConfirmarEliminacion = false;
 
             if (!IsPostBack)
             {
+                btnEliminar.Visible = false;
                 ElementoNegocio eNegocio = new ElementoNegocio();
                 cargarDdls(ddlTipo, eNegocio.listar());
                 cargarDdls(ddlDebilidad, eNegocio.listar());
@@ -25,6 +29,7 @@ namespace PokeApp
                 if (Request.QueryString["id"] != null)
                 {
                     cargarDatos(Request.QueryString["id"]);
+                    btnEliminar.Visible = true;
                 }
             }            
         }
@@ -54,8 +59,17 @@ namespace PokeApp
                 nuevo.Debilidad = new Elemento();
                 nuevo.Debilidad.Id = int.Parse(ddlDebilidad.SelectedValue);
 
-                pNegocio.agregarPokemon(nuevo);
-                Response.Redirect("Default.aspx", false);
+                if (Request.QueryString["id"] != null)
+                {
+                    nuevo.Id = int.Parse(txtId.Text);
+                    pNegocio.modificarPokemon(nuevo);
+                }
+                else
+                {
+                    pNegocio.agregarPokemon(nuevo);
+                }
+
+                    Response.Redirect("Default.aspx", false);
             }
             catch (Exception ex)
             {
@@ -84,6 +98,30 @@ namespace PokeApp
         protected void txtImagen_TextChanged(object sender, EventArgs e)
         {
             imagenPokemon.ImageUrl = txtImagen.Text;
+        }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            ConfirmarEliminacion = true;
+        }
+
+        protected void btnConfirmarEliminacion_Click(object sender, EventArgs e)
+        {
+            PokemonNegocio pNegocio = new PokemonNegocio();
+            pNegocio.eliminacionFisica(int.Parse(Request.QueryString["id"]));
+            Response.Redirect("Default.aspx", false);
+        }
+
+        protected void btnCancelarEliminacion_Click(object sender, EventArgs e)
+        {
+            ConfirmarEliminacion = false;
+        }
+
+        protected void btnInactivar_Click(object sender, EventArgs e)
+        {
+            PokemonNegocio pNegocio = new PokemonNegocio();
+            pNegocio.eliminacionLogica(int.Parse(Request.QueryString["id"]));
+            Response.Redirect("Default.aspx", false);
         }
     }
 }

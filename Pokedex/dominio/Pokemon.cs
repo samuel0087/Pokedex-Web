@@ -18,6 +18,7 @@ namespace dominio
         public string UrlImagen { set; get; }
         public Elemento Tipo { set; get; }
         public Elemento Debilidad { set; get; }
+        public bool Estado { set; get; }
 
     }
 }
