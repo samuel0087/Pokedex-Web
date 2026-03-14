@@ -63,7 +63,7 @@ namespace negocio
             string query = @"SELECT p.Id, p.Numero, p.Nombre, p.Descripcion, p.UrlImagen, t.Id AS idTipo, t.Descripcion AS Tipo, d.Id As idDebilidad, d.Descripcion As Debilidad, p.Activo " +
                             "FROM POKEMONS p Inner Join ELEMENTOS t ON p.IdTipo = t.Id " +
                             "Inner Join ELEMENTOS d ON p.IdDebilidad = d.Id " +
-                            "Where Activo = 1 and p.Id = @id";
+                            "Where p.Id = @id";
 
             try
             {
@@ -223,6 +223,29 @@ namespace negocio
         {
             AccesoDatos datos = new AccesoDatos();
             string query = "Update Pokemons Set Activo = 0 Where Id = @idPokemon";
+
+            try
+            {
+                datos.setearConsulta(query);
+                datos.setearParametro("@idPokemon", id);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void reactivarPokemon(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            string query = "Update Pokemons Set Activo = 1 Where Id = @idPokemon";
 
             try
             {

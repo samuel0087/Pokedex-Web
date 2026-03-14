@@ -18,6 +18,7 @@ namespace PokeApp
         {
             txtId.Enabled = false;
             ConfirmarEliminacion = false;
+            btnInactivar.Visible = false;
 
             if (!IsPostBack)
             {
@@ -30,6 +31,7 @@ namespace PokeApp
                 {
                     cargarDatos(Request.QueryString["id"]);
                     btnEliminar.Visible = true;
+                    btnInactivar.Visible = true;
                 }
             }            
         }
@@ -93,6 +95,11 @@ namespace PokeApp
             txtImagen.Text = poke.UrlImagen;
             imagenPokemon.ImageUrl = poke.UrlImagen;
 
+            if (!poke.Estado)
+            {
+                btnInactivar.Text = "Activar";
+            }
+
         }
 
         protected void txtImagen_TextChanged(object sender, EventArgs e)
@@ -120,7 +127,18 @@ namespace PokeApp
         protected void btnInactivar_Click(object sender, EventArgs e)
         {
             PokemonNegocio pNegocio = new PokemonNegocio();
-            pNegocio.eliminacionLogica(int.Parse(Request.QueryString["id"]));
+
+            int idPokemon = int.Parse(Request.QueryString["id"]);
+
+            if (btnInactivar.Text == "Activar")
+            {
+                pNegocio.reactivarPokemon(idPokemon);
+            }
+            else
+            {
+                pNegocio.eliminacionLogica(idPokemon);
+            }
+
             Response.Redirect("Default.aspx", false);
         }
     }
