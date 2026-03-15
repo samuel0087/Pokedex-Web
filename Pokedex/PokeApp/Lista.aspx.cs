@@ -15,7 +15,12 @@ namespace PokeApp
         {
             PokemonNegocio negocio = new PokemonNegocio();
 
-            dgvPokemon.DataSource = negocio.listar();
+            if (!IsPostBack)
+            {
+                Session.Add("listaPokemons", negocio.listar());
+            }
+
+            dgvPokemon.DataSource = Session["listaPokemons"];
             dgvPokemon.DataBind();
         }
 
@@ -29,6 +34,17 @@ namespace PokeApp
         {
             dgvPokemon.PageIndex = e.NewPageIndex;
             dgvPokemon.DataBind();
+        }
+
+        protected void btnFiltro_Click(object sender, EventArgs e)
+        {
+            if (txtFiltro.Text.Length > 2) {
+                string filtro = txtFiltro.Text.ToUpper();
+                List<Pokemon> listaFiltrada = ((List<Pokemon>)Session["listaPokemons"]).FindAll(x => x.Nombre.ToUpper().Contains(filtro) || x.Tipo.Descripcion.ToUpper().Contains(filtro)|| x.Descripcion.ToUpper().Contains(filtro));
+                dgvPokemon.DataSource = null;
+                dgvPokemon.DataSource = listaFiltrada;
+                dgvPokemon.DataBind();
+            }
         }
     }
 }
