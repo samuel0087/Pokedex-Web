@@ -265,14 +265,14 @@ namespace negocio
             }
         }
 
-        public List<Pokemon> filtrar(string campo, string criterio, string filtro)
+        public List<Pokemon> filtrar(string campo, string criterio, string filtro, string estado)
         {
             AccesoDatos datos = new AccesoDatos();
             List<Pokemon> list = new List<Pokemon>();
-            string query = @"SELECT p.Id, p.Numero, p.Nombre, p.Descripcion, p.UrlImagen, t.Id AS idTipo, t.Descripcion AS Tipo, d.Id As idDebilidad, d.Descripcion As Debilidad " +
+            string query = @"SELECT p.Id, p.Numero, p.Nombre, p.Descripcion, p.UrlImagen, t.Id AS idTipo, t.Descripcion AS Tipo, d.Id As idDebilidad, d.Descripcion As Debilidad, p.Activo " +
                             "FROM POKEMONS p Inner Join ELEMENTOS t ON p.IdTipo = t.Id " +
                             "Inner Join ELEMENTOS d ON p.IdDebilidad = d.Id " +
-                            "Where Activo = 1 And p." + campo;
+                            "Where p." + campo;
 
             try
             {
@@ -281,11 +281,11 @@ namespace negocio
                     switch (criterio)
                     {
                         case "Mayor que":
-                            query += " < " + filtro;
+                            query += " > " + filtro;
                             break;
 
                         case "Menor que":
-                            query += " > " + filtro;
+                            query += " < " + filtro;
                             break;
 
                         case "Igual que":
@@ -315,6 +315,15 @@ namespace negocio
                     }
                 }
 
+                if(estado == "Activo")
+                {
+                    query += " AND Activo = 1";
+                }
+                else if(estado == "Inactivo")
+                {
+                    query += " AND Activo = 0";
+                }
+
 
                 datos.setearConsulta(query);
                 datos.ejecutarLectura();
@@ -328,6 +337,7 @@ namespace negocio
                     aux.Nombre = datos.Lector["Nombre"] is DBNull ? "" : (string)datos.Lector["Nombre"];
                     aux.Descripcion = datos.Lector["Descripcion"] is DBNull ? "" : (string)datos.Lector["Descripcion"];
                     aux.UrlImagen = datos.Lector["UrlImagen"] is DBNull ? "" : (string)datos.Lector["UrlImagen"];
+                    aux.Estado = datos.Lector["Activo"] is DBNull ? false : (bool)datos.Lector["Activo"];
 
                     aux.Tipo = new Elemento();
                     aux.Tipo.Id = datos.Lector["idTipo"] is DBNull ? 0 : (int)datos.Lector["idTipo"];
