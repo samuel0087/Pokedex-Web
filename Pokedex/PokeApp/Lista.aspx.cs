@@ -19,10 +19,10 @@ namespace PokeApp
             if (!IsPostBack)
             {
                 Session.Add("listaPokemons", negocio.listar());
+                dgvPokemon.DataSource = Session["listaPokemons"];
+                dgvPokemon.DataBind();
             }
 
-            dgvPokemon.DataSource = Session["listaPokemons"];
-            dgvPokemon.DataBind();
         }
 
         protected void dgvPokemon_SelectedIndexChanged(object sender, EventArgs e)
@@ -46,6 +46,12 @@ namespace PokeApp
                 dgvPokemon.DataSource = listaFiltrada;
                 dgvPokemon.DataBind();
             }
+            else
+            {
+                dgvPokemon.DataSource = (List<Pokemon>)Session["listaPokemons"];
+                dgvPokemon.DataBind();
+            }
+ 
         }
         public void chkFiltroAvanzado_CheckedChanged(object sender, EventArgs e)
         {
@@ -82,7 +88,8 @@ namespace PokeApp
         {
             PokemonNegocio negocio = new PokemonNegocio();
             dgvPokemon.DataSource = null;
-            dgvPokemon.DataSource = negocio.filtrar(ddlCampo.SelectedItem.ToString(), ddlCriterio.SelectedItem.ToString(), txtFiltroAvanzado.Text, ddlEstado.SelectedItem.ToString());
+            List<Pokemon> filtrada = negocio.filtrar(ddlCampo.SelectedItem.ToString(), ddlCriterio.SelectedItem.ToString(), txtFiltroAvanzado.Text, ddlEstado.SelectedItem.ToString());
+            dgvPokemon.DataSource = filtrada;
             dgvPokemon.DataBind();
         }
     }
