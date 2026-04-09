@@ -49,7 +49,19 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Lista.aspx">Lista de Pokemons</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/EjemploDropDowns.aspx">DropDowns</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Favoritos.aspx">Favoritos</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Perfil.aspx">Perfil</a></li>
                     </ul>
+                </div>
+
+                <div class="d-sm-inline-flex ">
+                    <asp:Button Text="Login" CssClass="btn btn-success" runat="server" />
+                    <a href="Registro.aspx" class="btn btn-link">Registrarse</a>
+
+                    <div  style="width:40px; height:40px;" class="rounded-circle overflow-hidden ms-2">
+                        <img class="h-100 w-100"  src="https://static.vecteezy.com/system/resources/thumbnails/010/282/085/small/black-background-studio-blank-black-and-gray-background-studio-backdrop-wallpaper-inside-room-abstract-dark-gray-gradient-spotlight-floor-texture-background-free-photo.jpg" alt="Alternate Text" />
+                    </div>
+
                 </div>
             </div>
         </nav>

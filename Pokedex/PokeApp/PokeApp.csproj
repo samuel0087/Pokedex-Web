@@ -124,6 +124,7 @@
     <Content Include="Lista.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Precarga.aspx" />
+    <Content Include="Registro.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -235,6 +236,13 @@
       <DependentUpon>Precarga.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registro.aspx.cs">
+      <DependentUpon>Registro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Registro.aspx.designer.cs">
+      <DependentUpon>Registro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
