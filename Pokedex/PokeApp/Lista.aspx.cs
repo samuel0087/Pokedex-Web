@@ -14,6 +14,11 @@ namespace PokeApp
         public bool FiltroAvanzado {  get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Seguridad.esAdmin(Session["trainee"]))
+            {
+                Response.Redirect("Default.aspx", false);
+            }
+
             PokemonNegocio negocio = new PokemonNegocio();
             FiltroAvanzado = chkFiltroAvanzado.Checked;
             if (!IsPostBack)

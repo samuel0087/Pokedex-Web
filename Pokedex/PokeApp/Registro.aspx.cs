@@ -22,17 +22,25 @@ namespace PokeApp
             {
                 Trainee user = new Trainee();
                 TraineeNegocio negocio = new TraineeNegocio();
+                EmailService emailService = new EmailService();
 
                 user.Email = txtEmail.Text;
                 user.Password = txtPass.Text;
                 user.Id = negocio.InsertarNuevo(user);
-                Response.Redirect("Default.aspx");
+
+                emailService.ArmarCorreo(user.Email, "Bienvenido maestro pokemon", "Hola, ya eres parte de nuestra comunidad pokemon");
+                emailService.enviarEmail();
+
+                Session.Add("trainee", user);
+
+                Response.Redirect("Default.aspx", false);
 
 
             }
             catch (Exception ex)
             {
                 Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
             }
 
         }
