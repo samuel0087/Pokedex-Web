@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "negocio", "negocio\negocio.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokeApp", "PokeApp\PokeApp.csproj", "{B5C25D95-6A14-4CA7-8733-52ECEA72046A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokeApp-MVC", "PokeApp-MVC\PokeApp-MVC.csproj", "{2CA6163C-3967-41D5-B8D7-39B8087A3B12}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B5C25D95-6A14-4CA7-8733-52ECEA72046A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5C25D95-6A14-4CA7-8733-52ECEA72046A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5C25D95-6A14-4CA7-8733-52ECEA72046A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CA6163C-3967-41D5-B8D7-39B8087A3B12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CA6163C-3967-41D5-B8D7-39B8087A3B12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CA6163C-3967-41D5-B8D7-39B8087A3B12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CA6163C-3967-41D5-B8D7-39B8087A3B12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
