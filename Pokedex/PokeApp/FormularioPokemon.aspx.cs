@@ -46,7 +46,7 @@ namespace PokeApp
 
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
-            Pokemon nuevo = new Pokemon();
+            Pokemons nuevo = new Pokemons();
             PokemonNegocio pNegocio = new PokemonNegocio();
             try
             {
@@ -84,7 +84,7 @@ namespace PokeApp
 
         private void cargarDatos(string id)
         {
-            Pokemon poke = negocio.getOne(int.Parse(id));
+            Pokemons poke = negocio.getOne(int.Parse(id));
 
             txtId.Text = poke.Id.ToString();
             txtNombre.Text = poke.Nombre;

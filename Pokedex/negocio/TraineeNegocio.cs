@@ -34,7 +34,7 @@ namespace negocio
 		public bool Login(Trainee usuario)
 		{
 			AccesoDatos datos = new AccesoDatos();
-			string query = "SELECT Id, Email, Pass, Admin FROM USERS WHERE Email = @email AND Pass = @pass";
+			string query = "SELECT Id, Email, Pass,Nombre, Apellido, ImagenPerfil, Admin FROM USERS WHERE Email = @email AND Pass = @pass";
 
 			try
 			{
@@ -45,6 +45,9 @@ namespace negocio
 				if (datos.Lector.Read())
 				{
 					usuario.Id = datos.Lector["Id"] is DBNull ? 0 : (int)datos.Lector["Id"];
+					usuario.Nombre = datos.Lector["Nombre"] is DBNull ? "" : (string)datos.Lector["Nombre"];
+					usuario.Apellido = datos.Lector["Apellido"] is DBNull ? "" : (string)datos.Lector["Apellido"];
+					usuario.ImagenPerfil = datos.Lector["ImagenPerfil"] is DBNull ? "" : (string)datos.Lector["ImagenPerfil"];
 					usuario.Admin = datos.Lector["Admin"] is DBNull ? false : (bool)datos.Lector["Admin"];
 					return true;
 				}
@@ -54,6 +57,29 @@ namespace negocio
 			catch (Exception ex)
 			{
 
+				throw ex;
+			}
+			finally
+			{
+				datos.cerrarConexion();
+			}
+		}
+
+		public void actualizar(Trainee user)
+		{
+			AccesoDatos datos = new AccesoDatos();
+			string query = "UPDATE USERS SET Nombre = @nombre, Apellido = @apellido, ImagenPerfil = @img WHERE Id = @id"; ;
+			try
+			{
+				datos.setearConsulta(query);
+				datos.setearParametro("@id", user.Id);
+				datos.setearParametro("@nombre", user.Nombre);
+				datos.setearParametro("@apellido", user.Apellido);
+				datos.setearParametro("@img", user.ImagenPerfil != "" ? user.ImagenPerfil : "");
+				datos.ejecutarAccion();
+			}
+			catch (Exception ex)
+			{
 				throw ex;
 			}
 			finally

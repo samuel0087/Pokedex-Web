@@ -64,9 +64,10 @@
 
                     <%}else{%>
                         <asp:Button Text="Logout" ID="btnLogout" CssClass="btn btn-danger" OnClick="btnLogout_Click" runat="server" />
-
-                         <div  style="width:40px; height:40px;" class="rounded-circle overflow-hidden ms-2">
-                            <img class="h-100 w-100"  src="https://static.vecteezy.com/system/resources/thumbnails/010/282/085/small/black-background-studio-blank-black-and-gray-background-studio-backdrop-wallpaper-inside-room-abstract-dark-gray-gradient-spotlight-floor-texture-background-free-photo.jpg" alt="Alternate Text" />
+                        
+                        <asp:Image ID="imgPerfilAvatar" style="height: 40px; width: 40px; border-radius:50%;"
+                             ImageUrl=""
+                             runat="server"/>
                         </div>
                     <%} %>
 

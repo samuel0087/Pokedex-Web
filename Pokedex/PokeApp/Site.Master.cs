@@ -1,4 +1,5 @@
-﻿using negocio;
+﻿using dominio;
+using negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace PokeApp
             if (Seguridad.sessionActiva(Session["trainee"]))
             {
                 sesionActiva = true;
+                imgPerfilAvatar.ImageUrl = "~/Images/" + ((Trainee)Session["trainee"]).ImagenPerfil;
             }
 
             if (!(Page is Login) && !(Page is _Default) && !(Page is Registro) && !(Page is Error))

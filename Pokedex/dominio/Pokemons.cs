@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace dominio
 {
-    public class Pokemon
+    public class Pokemons
     {
         public int Id {  get; set; }
         [DisplayName("Número")]
