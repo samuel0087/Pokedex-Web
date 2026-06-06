@@ -15,6 +15,7 @@ namespace dominio
         public string Nombre { set; get; }
         [DisplayName("Descripción")]
         public string Descripcion { set; get; }
+        [DisplayName("Imagen")]
         public string UrlImagen { set; get; }
         public Elemento Tipo { set; get; }
         public Elemento Debilidad { set; get; }

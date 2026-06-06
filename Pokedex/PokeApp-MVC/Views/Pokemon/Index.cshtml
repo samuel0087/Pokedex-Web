@@ -7,7 +7,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -18,9 +18,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
-            <th>
+@*             <th>
                 @Html.DisplayNameFor(model => model.Descripcion)
-            </th>
+            </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.UrlImagen)
             </th>
@@ -45,17 +45,18 @@
             <td>
                 @Html.DisplayFor(model => item.Nombre)
             </td>
-            <td>
+            @* <td>
                 @Html.DisplayFor(model => item.Descripcion)
+            </td> *@
+            <td>
+                @* @Html.DisplayFor(model => item.UrlImagen) *@
+                <img src="@item.UrlImagen" height="70" alt="Imagen de Pokemon" />
             </td>
             <td>
-                @Html.DisplayFor(model => item.UrlImagen)
-            </td>
+                @Html.DisplayFor(model => item.Tipo.Descripcion)
+            </td> 
             <td>
-                @Html.DisplayFor(model => item.Tipo)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.Debilidad)
+                @Html.DisplayFor(model => item.Debilidad.Descripcion)
             </td>
             <td>
                 @Html.DisplayFor(model => item.Estado)
