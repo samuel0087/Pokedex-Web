@@ -46,14 +46,14 @@ namespace PokeApp
         {
             if (txtFiltro.Text.Length > 2) {
                 string filtro = txtFiltro.Text.ToUpper();
-                List<Pokemons> listaFiltrada = ((List<Pokemons>)Session["listaPokemons"]).FindAll(x => x.Nombre.ToUpper().Contains(filtro) || x.Tipo.Descripcion.ToUpper().Contains(filtro)|| x.Descripcion.ToUpper().Contains(filtro));
+                List<Pokemon> listaFiltrada = ((List<Pokemon>)Session["listaPokemons"]).FindAll(x => x.Nombre.ToUpper().Contains(filtro) || x.Tipo.Descripcion.ToUpper().Contains(filtro)|| x.Descripcion.ToUpper().Contains(filtro));
                 dgvPokemon.DataSource = null;
                 dgvPokemon.DataSource = listaFiltrada;
                 dgvPokemon.DataBind();
             }
             else
             {
-                dgvPokemon.DataSource = (List<Pokemons>)Session["listaPokemons"];
+                dgvPokemon.DataSource = (List<Pokemon>)Session["listaPokemons"];
                 dgvPokemon.DataBind();
             }
  
@@ -93,7 +93,7 @@ namespace PokeApp
         {
             PokemonNegocio negocio = new PokemonNegocio();
             dgvPokemon.DataSource = null;
-            List<Pokemons> filtrada = negocio.filtrar(ddlCampo.SelectedItem.ToString(), ddlCriterio.SelectedItem.ToString(), txtFiltroAvanzado.Text, ddlEstado.SelectedItem.ToString());
+            List<Pokemon> filtrada = negocio.filtrar(ddlCampo.SelectedItem.ToString(), ddlCriterio.SelectedItem.ToString(), txtFiltroAvanzado.Text, ddlEstado.SelectedItem.ToString());
             dgvPokemon.DataSource = filtrada;
             dgvPokemon.DataBind();
         }

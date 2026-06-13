@@ -34,7 +34,7 @@ namespace PokeApp
         protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
         {
             int id = int.Parse(ddlTipo.SelectedItem.Value);
-            ddlPokemonsFiltrados.DataSource = ((List<Pokemons>)Session["listaPokemons"]).FindAll(x => x.Tipo.Id == id);
+            ddlPokemonsFiltrados.DataSource = ((List<Pokemon>)Session["listaPokemons"]).FindAll(x => x.Tipo.Id == id);
             ddlPokemonsFiltrados.DataTextField = "Nombre";
             ddlPokemonsFiltrados.DataBind();
 

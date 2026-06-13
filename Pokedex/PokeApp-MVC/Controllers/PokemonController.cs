@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using dominio;
 using negocio;
+using PokeApp_MVC.Models;
 
 namespace PokeApp_MVC.Controllers
 {
@@ -29,10 +30,14 @@ namespace PokeApp_MVC.Controllers
         // POST: PokemonController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(dominio.Pokemon pokemon)
         {
             try
             {
+                PokemonNegocio nPokemon = new PokemonNegocio();
+                pokemon.Tipo.Id = 1;
+                pokemon.Debilidad.Id = 2;
+                nPokemon.agregarPokemon(pokemon);
                 return RedirectToAction(nameof(Index));
             }
             catch

@@ -9,9 +9,9 @@ namespace negocio
 {
     public class PokemonNegocio
     {
-        public List<Pokemons> listar()
+        public List<Pokemon> listar()
         {
-            List<Pokemons> list = new List<Pokemons>();
+            List<Pokemon> list = new List<Pokemon>();
             AccesoDatos datos = new AccesoDatos();
             string query = @"SELECT p.Id, p.Numero, p.Nombre, p.Descripcion, p.UrlImagen, t.Id AS idTipo, t.Descripcion AS Tipo, d.Id As idDebilidad, d.Descripcion As Debilidad, p.Activo " +
                             "FROM POKEMONS p Inner Join ELEMENTOS t ON p.IdTipo = t.Id " +
@@ -24,7 +24,7 @@ namespace negocio
 
                 while (datos.Lector.Read())
                 {
-                    Pokemons aux = new Pokemons();
+                    Pokemon aux = new Pokemon();
                     aux.Id = datos.Lector["Id"] is DBNull ? 0 : (int)datos.Lector["Id"];
                     aux.Numero = datos.Lector["Numero"] is DBNull ? 0 : (int)datos.Lector["Numero"];
                     aux.Nombre = datos.Lector["Nombre"] is DBNull ? "" : (string)datos.Lector["Nombre"];
@@ -57,7 +57,7 @@ namespace negocio
 
         }
 
-        public Pokemons getOne(int id)
+        public Pokemon getOne(int id)
         {
             AccesoDatos datos = new AccesoDatos();
             string query = @"SELECT p.Id, p.Numero, p.Nombre, p.Descripcion, p.UrlImagen, t.Id AS idTipo, t.Descripcion AS Tipo, d.Id As idDebilidad, d.Descripcion As Debilidad, p.Activo " +
@@ -70,7 +70,7 @@ namespace negocio
                 datos.setearConsulta(query);
                 datos.setearParametro("@id", id);
                 datos.ejecutarLectura();
-                Pokemons aux = new Pokemons();
+                Pokemon aux = new Pokemon();
 
                 if (datos.Lector.Read())
                 {
@@ -103,7 +103,7 @@ namespace negocio
 
         }
 
-        public void agregarPokemon(Pokemons pokemon)
+        public void agregarPokemon(Pokemon pokemon)
         {
             AccesoDatos datos = new AccesoDatos();
             String query = @"Insert Into POKEMONS (Numero, Nombre, Descripcion, UrlImagen, idTipo, idDebilidad, Activo) " +
@@ -168,7 +168,7 @@ namespace negocio
             }
         }
 
-        public void modificarPokemon(Pokemons pokemon)
+        public void modificarPokemon(Pokemon pokemon)
         {
             AccesoDatos datos = new AccesoDatos();
             string query = @"Update Pokemons set Numero = @numero, Nombre = @nombre, Descripcion = @descripcion, UrlImagen = @imagen, IdTipo = @idTipo, IdDebilidad = @idDebilidad where Id = @idPokemon;";
@@ -265,10 +265,10 @@ namespace negocio
             }
         }
 
-        public List<Pokemons> filtrar(string campo, string criterio, string filtro, string estado)
+        public List<Pokemon> filtrar(string campo, string criterio, string filtro, string estado)
         {
             AccesoDatos datos = new AccesoDatos();
-            List<Pokemons> list = new List<Pokemons>();
+            List<Pokemon> list = new List<Pokemon>();
             string query = @"SELECT p.Id, p.Numero, p.Nombre, p.Descripcion, p.UrlImagen, t.Id AS idTipo, t.Descripcion AS Tipo, d.Id As idDebilidad, d.Descripcion As Debilidad, p.Activo " +
                             "FROM POKEMONS p Inner Join ELEMENTOS t ON p.IdTipo = t.Id " +
                             "Inner Join ELEMENTOS d ON p.IdDebilidad = d.Id " +
@@ -331,7 +331,7 @@ namespace negocio
 
                 while (datos.Lector.Read())
                 {
-                    Pokemons aux = new Pokemons();
+                    Pokemon aux = new Pokemon();
                     aux.Id = datos.Lector["Id"] is DBNull ? 0 : (int)datos.Lector["Id"];
                     aux.Numero = datos.Lector["Numero"] is DBNull ? 0 : (int)datos.Lector["Numero"];
                     aux.Nombre = datos.Lector["Nombre"] is DBNull ? "" : (string)datos.Lector["Nombre"];

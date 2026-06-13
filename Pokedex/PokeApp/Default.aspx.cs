@@ -11,7 +11,7 @@ namespace PokeApp
 {
     public partial class _Default : Page
     {
-        public List<Pokemons> listaPokemon;
+        public List<Pokemon> listaPokemon;
         public void Page_Load(object sender, EventArgs e)
         {
             PokemonNegocio negocio = new PokemonNegocio();
