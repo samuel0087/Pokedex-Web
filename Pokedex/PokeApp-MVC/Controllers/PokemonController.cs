@@ -28,7 +28,7 @@ namespace PokeApp_MVC.Controllers
             try
             {
                 ElementoNegocio nElemento = new ElementoNegocio();
-                ViewBag.Elemetos = new SelectList(nElemento.listar(), "Id", "Descripcion");
+                ViewBag.Elemento = new SelectList(nElemento.listar(), "Id", "Descripcion");
                 return View();
 
             }
@@ -66,7 +66,25 @@ namespace PokeApp_MVC.Controllers
         // GET: PokemonController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            try
+            {
+                PokemonNegocio nPokemon = new PokemonNegocio();
+                ElementoNegocio nElemento = new ElementoNegocio();
+
+                var pokemon = nPokemon.getOne(id);
+                var listaElementos = nElemento.listar();
+
+                ViewBag.Tipos = new SelectList(listaElementos, "Id", "Descripcion", pokemon.Tipo.Id);
+                ViewBag.Debilidades = new SelectList(listaElementos, "Id", "Descripcion", pokemon.Debilidad.Id);
+
+                return View(pokemon);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         // POST: PokemonController/Edit/5

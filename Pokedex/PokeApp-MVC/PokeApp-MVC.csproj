@@ -16,8 +16,4 @@
     <ProjectReference Include="..\negocio\negocio.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Pokemon\" />
-  </ItemGroup>
-
 </Project>
