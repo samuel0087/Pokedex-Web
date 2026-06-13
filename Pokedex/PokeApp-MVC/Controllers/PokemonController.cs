@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using dominio;
 using negocio;
 using PokeApp_MVC.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace PokeApp_MVC.Controllers
 {
@@ -24,7 +25,18 @@ namespace PokeApp_MVC.Controllers
         // GET: PokemonController/Create
         public ActionResult Create()
         {
-            return View();
+            try
+            {
+                ElementoNegocio nElemento = new ElementoNegocio();
+                ViewBag.Elemetos = new SelectList(nElemento.listar(), "Id", "Descripcion");
+                return View();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         // POST: PokemonController/Create
@@ -34,6 +46,11 @@ namespace PokeApp_MVC.Controllers
         {
             try
             {
+                if (!ModelState.IsValid) 
+                {
+                    return View(pokemon);
+                }
+
                 PokemonNegocio nPokemon = new PokemonNegocio();
                 pokemon.Tipo.Id = 1;
                 pokemon.Debilidad.Id = 2;
