@@ -1,0 +1,56 @@
+﻿@model dominio.Pokemon
+
+@{
+    ViewData["Title"] = "Eliminar";
+}
+
+<h1>Eliminar</h1>
+
+<h3>¿Deseas eliminar el siguiente registro?</h3>
+
+<div>
+    <h4>Pokemon</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Numero)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Numero)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Tipo.Descripcion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tipo.Descripcion)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Debilidad.Descripcion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Debilidad.Descripcion)
+        </dd>
+
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="submit" Value="Delete" class="btn btn-danger" />
+        <a asp-action="index">Volver a la lista</a>
+    </form>
+</div>

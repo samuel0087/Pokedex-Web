@@ -10,16 +10,27 @@ namespace PokeApp_MVC.Controllers
     public class PokemonController : Controller
     {
         // GET: PokemonController
-        public ActionResult Index()
+        public ActionResult Index(string filtro)
         {
             PokemonNegocio nPokemon = new PokemonNegocio();
-            return View(nPokemon.listar());
+            var pokemons = nPokemon.listar();
+
+            if(!string.IsNullOrEmpty(filtro))
+            {
+                pokemons = pokemons.FindAll(x => x.Nombre.ToUpper().Contains(filtro.ToUpper()));
+             }
+
+            ViewBag.Filtro = filtro;
+
+            return View(pokemons);
         }
 
         // GET: PokemonController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            PokemonNegocio nPokemon = new PokemonNegocio();
+            dominio.Pokemon pokemon = nPokemon.getOne(id);
+            return View(pokemon);
         }
 
         // GET: PokemonController/Create
@@ -90,10 +101,12 @@ namespace PokeApp_MVC.Controllers
         // POST: PokemonController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(dominio.Pokemon pokemon)
         {
             try
             {
+                PokemonNegocio nPokemon = new PokemonNegocio();
+                nPokemon.modificarPokemon(pokemon);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -105,7 +118,9 @@ namespace PokeApp_MVC.Controllers
         // GET: PokemonController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            PokemonNegocio nPokemon = new PokemonNegocio();
+            dominio.Pokemon pokemon = nPokemon.getOne(id);
+            return View(pokemon);
         }
 
         // POST: PokemonController/Delete/5
@@ -115,6 +130,8 @@ namespace PokeApp_MVC.Controllers
         {
             try
             {
+                PokemonNegocio nPokemon = new PokemonNegocio();
+                nPokemon.eliminacionFisica(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

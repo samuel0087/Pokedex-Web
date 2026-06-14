@@ -1,0 +1,62 @@
+﻿@model dominio.Pokemon
+
+@{
+    ViewData["Title"] = "Detalle";
+}
+
+<h1>Detalle de Pokemon</h1>
+
+<div>
+    <h4>Pokemon</h4>
+    <hr />
+    <div class="row">
+        <div class="col-7">
+            <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Numero)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Numero)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Tipo.Descripcion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tipo.Descripcion)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Debilidad.Descripcion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Debilidad.Descripcion)
+        </dd>
+
+    </dl>
+        </div>
+
+        <div class="col">
+            <img src="@Model.UrlImagen" height="200" alt="Imagen de Pokemon" />
+        </div>
+    </div>
+
+    <form asp-action="Edit">
+        <a asp-action="Edit" asp-route-id="@Model.Id">Editar</a>
+        <a asp-action="index">Volver a la lista</a>
+    </form>
+</div>
