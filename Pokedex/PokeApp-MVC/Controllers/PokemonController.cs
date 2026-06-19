@@ -23,8 +23,7 @@ namespace PokeApp_MVC.Controllers
         // GET: PokemonController
         public ActionResult Index(string filtro)
         {
-            PokemonNegocio nPokemon = new PokemonNegocio();
-            var pokemons = nPokemon.listar();
+            var pokemons = _pokemonNegocio.listar();
 
             if(!string.IsNullOrEmpty(filtro))
             {
@@ -39,8 +38,7 @@ namespace PokeApp_MVC.Controllers
         // GET: PokemonController/Details/5
         public ActionResult Details(int id)
         {
-            PokemonNegocio nPokemon = new PokemonNegocio();
-            dominio.Pokemon pokemon = nPokemon.getOne(id);
+            dominio.Pokemon pokemon = _pokemonNegocio.getOne(id);
             return View(pokemon);
         }
 
@@ -49,8 +47,7 @@ namespace PokeApp_MVC.Controllers
         {
             try
             {
-                ElementoNegocio nElemento = new ElementoNegocio();
-                ViewBag.Elemento = new SelectList(nElemento.listar(), "Id", "Descripcion");
+                ViewBag.Elemento = new SelectList(_elementoNegocio.listar(), "Id", "Descripcion");
                 return View();
 
             }
@@ -72,11 +69,9 @@ namespace PokeApp_MVC.Controllers
                 {
                     return View(pokemon);
                 }
-
-                PokemonNegocio nPokemon = new PokemonNegocio();
                 pokemon.Tipo.Id = 1;
                 pokemon.Debilidad.Id = 2;
-                nPokemon.agregarPokemon(pokemon);
+                _pokemonNegocio.agregarPokemon(pokemon);
                 return RedirectToAction(nameof(Index));
             }
             catch
