@@ -9,6 +9,17 @@ namespace PokeApp_MVC.Controllers
 {
     public class PokemonController : Controller
     {
+        private PokemonNegocio _pokemonNegocio;
+        private ElementoNegocio _elementoNegocio;
+
+        public PokemonController(PokemonNegocio pokemonNegocio, ElementoNegocio elementoNegocio)
+        {
+            _pokemonNegocio = pokemonNegocio;
+            _elementoNegocio = elementoNegocio;
+        }
+
+
+
         // GET: PokemonController
         public ActionResult Index(string filtro)
         {

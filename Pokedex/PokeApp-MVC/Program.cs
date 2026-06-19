@@ -1,7 +1,12 @@
+using negocio;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<PokemonNegocio>();
+builder.Services.AddScoped<ElementoNegocio>();
 
 var app = builder.Build();
 
